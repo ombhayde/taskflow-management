@@ -92,7 +92,7 @@ This project **fully implements** all required features plus additional enterpri
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/taskflow-management.git
+   git clone https://github.com/ombhayde/taskflow-management.git
    cd taskflow-management
    ```
 
@@ -119,7 +119,7 @@ This project **fully implements** all required features plus additional enterpri
 
 2. **Clone and install dependencies**
    ```bash
-   git clone https://github.com/your-username/taskflow-management.git
+   git clone https://github.com/ombhayde/taskflow-management.git
    cd taskflow-management
    npm install
    ```
@@ -460,7 +460,7 @@ taskflow-management/
 ### **Quick Production Deploy**
 ```bash
 # Clone repository
-git clone https://github.com/your-username/taskflow-management.git
+git clone https://github.com/ombhayde/taskflow-management.git
 cd taskflow-management
 
 # Start production environment
