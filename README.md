@@ -166,22 +166,6 @@ docker-compose ps         # Check status
 └── docs/ & postman/ # API documentation
 ```
 
-## Assignment Compliance
-
-**Core Requirements ✓**
-- Models: MySQL users + MongoDB tasks with all required fields
-- Features: Authentication (signup/login with JWT) + Task CRUD + Search + Pagination
-- Tech: Node.js/Express, dual databases, JWT auth, environment variables, error handling
-
-**Bonus Features ✓**
-- Docker containerization, unit tests, API documentation, soft delete
-
-**Deliverables ✓**
-- GitHub repo, comprehensive README, Postman collection
-
-**Full Stack ✓**
-- React frontend with authentication, responsive design, real-time updates
-
 ## Security & Performance
 
 **Security:** JWT authentication, bcrypt hashing, rate limiting, CORS, input validation, XSS protection  
@@ -192,14 +176,6 @@ docker-compose ps         # Check status
 **Postman Collection:** Import `postman/TaskFlow-API.postman_collection.json` for API testing  
 **Test Credentials:** `debug@example.com` / `debug123`  
 **API Docs:** Available at `http://localhost:5000/api/docs`
-
-## Project Stats
-
-- 5,000+ lines of code (Backend + Frontend)
-- 24+ tests with 85%+ coverage
-- 10+ documented API endpoints
-- 100% assignment compliance + bonus features
-
 ---
 
 **Built as a Backend/Full Stack Developer Intern Assignment**
