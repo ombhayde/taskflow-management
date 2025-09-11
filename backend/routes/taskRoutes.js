@@ -24,7 +24,6 @@ router.post("/", validateTask, createTask)
 router.put("/:id", validateTaskUpdate, updateTask)
 router.delete("/:id", deleteTask)
 
-// Bulk operations
 router.patch("/bulk", bulkUpdateTasks)
 
 module.exports = router

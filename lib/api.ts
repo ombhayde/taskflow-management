@@ -10,7 +10,6 @@ const api = axios.create({
   },
 })
 
-// Add auth token to requests
 api.interceptors.request.use((config) => {
   const token = Cookies.get("token")
   if (token) {
@@ -19,12 +18,10 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Handle auth errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Only remove token, let AuthContext handle the redirect
       Cookies.remove("token")
     }
     return Promise.reject(error)

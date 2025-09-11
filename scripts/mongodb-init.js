@@ -1,16 +1,12 @@
-// MongoDB initialization script for Docker
 const db = db.getSiblingDB("task_management")
 
-// Create collections
 db.createCollection("tasks")
 
-// Create indexes
 db.tasks.createIndex({ userId: 1, status: 1 })
 db.tasks.createIndex({ userId: 1, isDeleted: 1 })
 db.tasks.createIndex({ userId: 1, createdAt: -1 })
 db.tasks.createIndex({ title: "text", description: "text" })
 
-// Insert sample data
 db.tasks.insertMany([
   {
     userId: 1,

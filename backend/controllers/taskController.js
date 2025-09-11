@@ -1,7 +1,6 @@
 const Task = require("../models/Task")
 const taskService = require("../services/taskService")
 
-// Get all tasks for user with pagination and filtering
 const getTasks = async (req, res) => {
   try {
     const userId = req.user.id
@@ -41,7 +40,6 @@ const getTasks = async (req, res) => {
   }
 }
 
-// Get single task
 const getTask = async (req, res) => {
   try {
     const { id } = req.params
@@ -68,7 +66,6 @@ const getTask = async (req, res) => {
   }
 }
 
-// Create new task
 const createTask = async (req, res) => {
   try {
     const userId = req.user.id
@@ -89,7 +86,6 @@ const createTask = async (req, res) => {
   }
 }
 
-// Update task
 const updateTask = async (req, res) => {
   try {
     const { id } = req.params
@@ -118,7 +114,6 @@ const updateTask = async (req, res) => {
   }
 }
 
-// Delete task (soft delete)
 const deleteTask = async (req, res) => {
   try {
     const { id } = req.params
@@ -145,7 +140,6 @@ const deleteTask = async (req, res) => {
   }
 }
 
-// Get task statistics
 const getTaskStats = async (req, res) => {
   try {
     const userId = req.user.id
@@ -163,7 +157,6 @@ const getTaskStats = async (req, res) => {
   }
 }
 
-// Bulk operations
 const bulkUpdateTasks = async (req, res) => {
   try {
     const userId = req.user.id

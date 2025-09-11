@@ -1,19 +1,16 @@
-// MongoDB seeding script
 const mongoose = require("mongoose")
 require("dotenv").config()
 
-// Connect to MongoDB
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI)
-    console.log("✅ Connected to MongoDB for seeding")
+    console.log("Connected to MongoDB for seeding")
   } catch (error) {
-    console.error("❌ MongoDB connection failed:", error.message)
+    console.error("MongoDB connection failed:", error.message)
     process.exit(1)
   }
 }
 
-// Sample tasks data
 const sampleTasks = [
   {
     userId: 1,
@@ -65,36 +62,30 @@ const sampleTasks = [
   },
 ]
 
-// Seed function
 const seedDatabase = async () => {
   try {
-    // Import Task model
     const Task = require("../models/Task")
 
-    // Clear existing tasks
     await Task.deleteMany({})
-    console.log("🗑️ Cleared existing tasks")
+    console.log("Cleared existing tasks")
 
-    // Insert sample tasks
     const tasks = await Task.insertMany(sampleTasks)
-    console.log(`✅ Inserted ${tasks.length} sample tasks`)
+    console.log(` Inserted ${tasks.length} sample tasks`)
 
-    console.log("🌱 Database seeding completed successfully")
+    console.log(" Database seeding completed successfully")
   } catch (error) {
-    console.error("❌ Seeding failed:", error.message)
+    console.error(" Seeding failed:", error.message)
   } finally {
     await mongoose.connection.close()
-    console.log("🔒 MongoDB connection closed")
+    console.log(" MongoDB connection closed")
   }
 }
 
-// Run seeding
 const runSeed = async () => {
   await connectDB()
   await seedDatabase()
 }
 
-// Execute if run directly
 if (require.main === module) {
   runSeed()
 }

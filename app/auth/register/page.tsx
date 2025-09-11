@@ -36,7 +36,6 @@ export default function RegisterPage() {
     try {
       await registerUser(data.name, data.email, data.password)
     } catch (error) {
-      // Error handled in AuthContext
     } finally {
       setIsLoading(false)
     }
@@ -45,7 +44,6 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Logo */}
         <div className="flex items-center justify-center space-x-2 mb-8">
           <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
             <CheckCircle className="w-6 h-6 text-primary-foreground" />

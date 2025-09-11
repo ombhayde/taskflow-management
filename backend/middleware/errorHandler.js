@@ -1,13 +1,11 @@
 const errorHandler = (err, req, res, next) => {
   console.error("Error:", err)
 
-  // Default error
   const error = {
     status: "error",
     message: err.message || "Internal server error",
   }
 
-  // Specific error handling
   if (err.code === "ER_DUP_ENTRY") {
     error.message = "Resource already exists"
     return res.status(409).json(error)
@@ -28,7 +26,6 @@ const errorHandler = (err, req, res, next) => {
     return res.status(401).json(error)
   }
 
-  // Default server error
   res.status(500).json(error)
 }
 

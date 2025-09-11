@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # MySQL Database
   mysql:
     image: mysql:8.0
     container_name: taskflow-mysql
@@ -23,7 +22,6 @@ services:
       timeout: 20s
       retries: 10
 
-  # MongoDB Database
   mongodb:
     image: mongo:7.0
     container_name: taskflow-mongodb
@@ -44,7 +42,6 @@ services:
       timeout: 20s
       retries: 10
 
-  # Backend API
   backend:
     build:
       context: .
@@ -76,7 +73,6 @@ services:
     volumes:
       - ./logs:/app/logs
 
-  # Frontend Application
   frontend:
     build:
       context: .
@@ -94,7 +90,6 @@ services:
     networks:
       - taskflow-network
 
-  # Redis (Optional - for caching and sessions)
   redis:
     image: redis:7-alpine
     container_name: taskflow-redis
@@ -110,7 +105,6 @@ services:
       timeout: 20s
       retries: 10
 
-  # Nginx Reverse Proxy (Optional)
   nginx:
     image: nginx:alpine
     container_name: taskflow-nginx

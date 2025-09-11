@@ -9,7 +9,7 @@ const auth = (req, res, next) => {
         status: "error",
         message: "Access denied. No token provided.",
       })
-    } // ✅ Add closing brace for if statement
+    } 
     
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
     req.user = decoded
@@ -19,7 +19,7 @@ const auth = (req, res, next) => {
       status: "error",
       message: "Invalid token.",
     })
-  } // ✅ Add closing brace for try-catch
-} // ✅ Add closing brace for auth function
+  } 
+} 
 
 module.exports = { auth, authenticateToken: auth }

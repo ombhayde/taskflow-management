@@ -1,8 +1,6 @@
--- Create database if it doesn't exist
 CREATE DATABASE IF NOT EXISTS task_management;
 USE task_management;
 
--- Create users table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -14,13 +12,11 @@ CREATE TABLE IF NOT EXISTS users (
     INDEX idx_created_at (createdAt)
 );
 
--- Insert sample users for testing (passwords are 'password123')
 INSERT IGNORE INTO users (name, email, passwordHash) VALUES 
 ('John Doe', 'john@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj95.1LF/7HO'),
 ('Jane Smith', 'jane@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj95.1LF/7HO'),
 ('Bob Johnson', 'bob@example.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj95.1LF/7HO');
 
--- Create a view for user statistics
 CREATE OR REPLACE VIEW user_stats AS
 SELECT 
     u.id,

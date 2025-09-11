@@ -8,7 +8,6 @@ describe("Task Endpoints", () => {
   let taskId
 
   beforeAll(async () => {
-    // Register and login a test user
     const registerResponse = await request(app).post("/api/auth/register").send({
       name: "Task Test User",
       email: "tasktest@example.com",
@@ -20,7 +19,6 @@ describe("Task Endpoints", () => {
   })
 
   afterAll(async () => {
-    // Clean up test data
     await Task.deleteMany({ userId })
   })
 

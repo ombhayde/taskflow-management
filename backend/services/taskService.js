@@ -1,7 +1,6 @@
 const Task = require("../models/Task")
 
 class TaskService {
-  // Get tasks with filtering, pagination, and search
   async getTasks(userId, options = {}) {
     const {
       page = 1,
@@ -15,7 +14,6 @@ class TaskService {
       endDate,
     } = options
 
-    // Build filter query
     const filter = { userId }
 
     if (status) {
@@ -36,14 +34,11 @@ class TaskService {
       if (endDate) filter.createdAt.$lte = new Date(endDate)
     }
 
-    // Build sort object
     const sort = {}
     sort[sortBy] = sortOrder === "desc" ? -1 : 1
 
-    // Calculate pagination
     const skip = (page - 1) * limit
 
-    // Execute queries
     const [tasks, total] = await Promise.all([
       Task.find(filter).sort(sort).skip(skip).limit(Number.parseInt(limit)).lean(),
       Task.countDocuments(filter),
@@ -61,20 +56,17 @@ class TaskService {
     }
   }
 
-  // Create new task
   async createTask(taskData) {
     const task = new Task(taskData)
     await task.save()
     return task
   }
 
-  // Update task
   async updateTask(taskId, userId, updates) {
     const task = await Task.findOneAndUpdate({ _id: taskId, userId }, updates, { new: true, runValidators: true })
     return task
   }
 
-  // Soft delete task
   async deleteTask(taskId, userId) {
     const task = await Task.findOneAndUpdate(
       { _id: taskId, userId },
@@ -87,7 +79,6 @@ class TaskService {
     return task
   }
 
-  // Get task statistics
   async getTaskStats(userId) {
     const stats = await Task.aggregate([
       { $match: { userId, isDeleted: { $ne: true } } },
@@ -130,7 +121,6 @@ class TaskService {
     )
   }
 
-  // Bulk update tasks
   async bulkUpdateTasks(taskIds, userId, updates) {
     const result = await Task.updateMany({ _id: { $in: taskIds }, userId }, updates, { runValidators: true })
     return result

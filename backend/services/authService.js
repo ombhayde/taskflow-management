@@ -7,18 +7,15 @@ const authService = {
     const connection = await mysql.getConnection()
 
     try {
-      // Check if user already exists
       const [existingUsers] = await connection.execute("SELECT id FROM users WHERE email = ?", [email])
 
       if (existingUsers.length > 0) {
         throw new Error("User already exists with this email")
       }
 
-      // Hash password
       const saltRounds = 12
       const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-      // Insert user
       const [result] = await connection.execute(
         "INSERT INTO users (name, email, passwordHash) VALUES (?, ?, ?)",
         [name, email, hashedPassword],
@@ -26,7 +23,6 @@ const authService = {
 
       const userId = result.insertId
 
-      // Generate JWT token
       const token = jwt.sign({ id: userId, email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN })
 
       return {
@@ -42,7 +38,6 @@ const authService = {
     const connection = await mysql.getConnection()
 
     try {
-      // Find user
       const [users] = await connection.execute("SELECT id, name, email, passwordHash FROM users WHERE email = ?", [email])
 
       if (users.length === 0) {
@@ -51,13 +46,11 @@ const authService = {
 
       const user = users[0]
 
-      // Verify password
       const isValidPassword = await bcrypt.compare(password, user.passwordHash)
       if (!isValidPassword) {
         throw new Error("Invalid email or password")
       }
 
-      // Generate JWT token
       const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
       })

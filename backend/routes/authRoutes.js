@@ -1,7 +1,7 @@
 const express = require("express")
 const authController = require("../controllers/authController")
 const { validateRegistration, validateLogin } = require("../middleware/validation")
-const { auth } = require("../middleware/auth")  // ✅ Destructure auth function
+const { auth } = require("../middleware/auth")  
 
 const router = express.Router()
 

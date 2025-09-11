@@ -62,7 +62,6 @@ const validateTask = (req, res, next) => {
 const validateTaskUpdate = (req, res, next) => {
   const { title, description, status, priority } = req.body
 
-  // At least one field must be provided for update
   if (!title && !description && !status && !priority) {
     return res.status(400).json({
       status: "error",
@@ -70,7 +69,6 @@ const validateTaskUpdate = (req, res, next) => {
     })
   }
 
-  // Validate title if provided
   if (title !== undefined) {
     if (title.trim().length === 0) {
       return res.status(400).json({
@@ -86,7 +84,6 @@ const validateTaskUpdate = (req, res, next) => {
     }
   }
 
-  // Validate status if provided
   if (status !== undefined) {
     const validStatuses = ['todo', 'in-progress', 'completed']
     if (!validStatuses.includes(status)) {
@@ -97,7 +94,6 @@ const validateTaskUpdate = (req, res, next) => {
     }
   }
 
-  // Validate priority if provided
   if (priority !== undefined) {
     const validPriorities = ['low', 'medium', 'high']
     if (!validPriorities.includes(priority)) {

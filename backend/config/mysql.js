@@ -15,14 +15,13 @@ const connectMySQL = async () => {
       queueLimit: 0,
     })
 
-    // Test the connection
     const connection = await pool.getConnection()
     await connection.ping()
     connection.release()
 
-    console.log("✅ MySQL Connected successfully")
+    console.log(" MySQL Connected successfully")
   } catch (error) {
-    console.error("❌ MySQL connection failed:", error.message)
+    console.error(" MySQL connection failed:", error.message)
     throw error
   }
 }

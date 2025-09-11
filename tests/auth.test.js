@@ -10,7 +10,6 @@ describe("Authentication Endpoints", () => {
   })
 
   afterAll(async () => {
-    // Clean up test data
     await connection.execute("DELETE FROM users WHERE email LIKE '%test%'")
   })
 

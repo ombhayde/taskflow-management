@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # MySQL Database (Development)
   mysql-dev:
     image: mysql:8.0
     container_name: taskflow-mysql-dev
@@ -19,7 +18,6 @@ services:
     networks:
       - taskflow-dev-network
 
-  # MongoDB Database (Development)
   mongodb-dev:
     image: mongo:7.0
     container_name: taskflow-mongodb-dev
@@ -35,7 +33,6 @@ services:
     networks:
       - taskflow-dev-network
 
-  # Backend API (Development)
   backend-dev:
     build:
       context: .
@@ -67,7 +64,6 @@ services:
       - /app/node_modules
       - ./logs:/app/logs
 
-  # Frontend Application (Development)
   frontend-dev:
     build:
       context: .
@@ -89,7 +85,6 @@ services:
       - /app/node_modules
       - /app/.next
 
-  # Redis (Development)
   redis-dev:
     image: redis:7-alpine
     container_name: taskflow-redis-dev

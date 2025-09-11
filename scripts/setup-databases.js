@@ -13,9 +13,8 @@ class DatabaseSetup {
 
   async setupMySQL() {
     try {
-      console.log("🔄 Setting up MySQL database...")
+      console.log("Setting up MySQL database...")
 
-      // Connect without specifying database first
       this.mysqlConnection = await mysql.createConnection({
         host: process.env.MYSQL_HOST,
         port: process.env.MYSQL_PORT,
@@ -23,14 +22,11 @@ class DatabaseSetup {
         password: process.env.MYSQL_PASSWORD,
       })
 
-      // Create database if it doesn't exist
       await this.mysqlConnection.execute(`CREATE DATABASE IF NOT EXISTS ${process.env.MYSQL_DATABASE}`)
-      console.log(`✅ Database '${process.env.MYSQL_DATABASE}' created/verified`)
+      console.log(`Database '${process.env.MYSQL_DATABASE}' created/verified`)
 
-      // Use the database
       await this.mysqlConnection.execute(`USE ${process.env.MYSQL_DATABASE}`)
 
-      // Read and execute SQL initialization script
       const sqlScript = await fs.readFile(path.join(__dirname, "mysql-init.sql"), "utf8")
       const statements = sqlScript
         .split(";")
@@ -43,9 +39,9 @@ class DatabaseSetup {
         }
       }
 
-      console.log("✅ MySQL tables and data initialized")
+      console.log("MySQL tables and data initialized")
     } catch (error) {
-      console.error("❌ MySQL setup failed:", error.message)
+      console.error(" MySQL setup failed:", error.message)
       throw error
     } finally {
       if (this.mysqlConnection) {
@@ -56,18 +52,17 @@ class DatabaseSetup {
 
   async setupMongoDB() {
     try {
-      console.log("🔄 Setting up MongoDB database...")
+      console.log(" Setting up MongoDB database...")
 
       await mongoose.connect(process.env.MONGODB_URI)
-      console.log("✅ Connected to MongoDB")
+      console.log(" Connected to MongoDB")
 
-      // Import and run seeding
       const { seedDatabase } = require("./mongodb-seed")
       await seedDatabase()
 
-      console.log("✅ MongoDB setup completed")
+      console.log("MongoDB setup completed")
     } catch (error) {
-      console.error("❌ MongoDB setup failed:", error.message)
+      console.error("MongoDB setup failed:", error.message)
       throw error
     } finally {
       if (mongoose.connection.readyState === 1) {
@@ -78,28 +73,27 @@ class DatabaseSetup {
 
   async run() {
     try {
-      console.log("🚀 Starting database setup...")
+      console.log("Starting database setup...")
 
       await this.setupMySQL()
       await this.setupMongoDB()
 
-      console.log("🎉 Database setup completed successfully!")
-      console.log("\n📋 Setup Summary:")
-      console.log("   ✅ MySQL database and tables created")
-      console.log("   ✅ Sample users inserted")
-      console.log("   ✅ MongoDB connected and indexed")
-      console.log("   ✅ Sample tasks inserted")
-      console.log("\n🔐 Test Credentials:")
+      console.log(" Database setup completed successfully!")
+      console.log("\n Setup Summary:")
+      console.log("  MySQL database and tables created")
+      console.log(" Sample users inserted")
+      console.log("MongoDB connected and indexed")
+      console.log("Sample tasks inserted")
+      console.log("\nTest Credentials:")
       console.log("   Email: john@example.com")
       console.log("   Password: password123")
     } catch (error) {
-      console.error("❌ Database setup failed:", error.message)
+      console.error(" Database setup failed:", error.message)
       process.exit(1)
     }
   }
 }
 
-// Run setup if called directly
 if (require.main === module) {
   const setup = new DatabaseSetup()
   setup.run()

@@ -70,7 +70,6 @@ export default function DashboardPage() {
       setTasks(tasks)
     } catch (error) {
       console.log("[v0] Error fetching tasks:", error)
-      // Don't show error toast for now since backend might not be running
       setTasks([])
     } finally {
       setLoading(false)
@@ -83,7 +82,6 @@ export default function DashboardPage() {
       setStats(response.data)
     } catch (error) {
       console.log("[v0] Error fetching stats:", error)
-      // Use default stats if API fails
       setStats({ total: 0, pending: 0, inProgress: 0, completed: 0 })
     }
   }
@@ -101,7 +99,6 @@ export default function DashboardPage() {
       })
       console.log("[DEBUG] Create task response:", response.data)
       
-      // Defensive check for response structure
       const createdTask = response.data?.task || response.data?.data?.task
       
       if (!createdTask) {
@@ -204,7 +201,6 @@ export default function DashboardPage() {
         </header>
 
         <div className="container mx-auto px-4 py-8">
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -247,7 +243,6 @@ export default function DashboardPage() {
           </Card>
         </div>
 
-        {/* Controls */}
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
@@ -279,7 +274,6 @@ export default function DashboardPage() {
           </Button>
         </div>
 
-        {/* Create Task Form */}
         {showCreateForm && (
           <Card className="mb-6">
             <CardHeader>
@@ -327,7 +321,6 @@ export default function DashboardPage() {
           </Card>
         )}
 
-        {/* Tasks List */}
         <div className="space-y-4">
           {loading ? (
             <div className="text-center py-8">

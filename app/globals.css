@@ -1,9 +1,7 @@
-/* Removed @import "tailwindcss" and replaced with proper Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Added required Tailwind directives for @layer usage */
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -127,7 +125,6 @@
   }
 }
 
-/* Custom animations */
 @keyframes slideIn {
   from {
     opacity: 0;

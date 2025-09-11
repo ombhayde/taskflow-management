@@ -52,18 +52,15 @@ const taskSchema = new mongoose.Schema(
   },
 )
 
-// Indexes for better performance
 taskSchema.index({ userId: 1, status: 1 })
 taskSchema.index({ userId: 1, createdAt: -1 })
 taskSchema.index({ userId: 1, isDeleted: 1 })
 taskSchema.index({ title: "text", description: "text" })
 
-// Virtual for overdue status
 taskSchema.virtual("isOverdue").get(function () {
   return this.dueDate && this.dueDate < new Date() && this.status !== "completed"
 })
 
-// Soft delete middleware
 taskSchema.pre(/^find/, function () {
   this.find({ isDeleted: { $ne: true } })
 })
